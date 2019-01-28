@@ -26,7 +26,7 @@ def colour_mixer():
             print("The secondary colour is: Orange")
     elif input_colour_1 == "yellow" and input_colour_2 == "blue" \
             or input_colour_1 == "blue" and input_colour_2 == "yellow":
-            print("The secondary colour is: Purple")
+            print("The secondary colour is: Green")
     else:
         print("You did not pick a primary colour, and you can not pick same two primary colours")
 
