@@ -13,11 +13,12 @@ def number_generator():
         if x == 0:
             return []
         else:
+            #add random integers from 1 - 49 to the list
             list = helper_function(x - 1)
             list.append(random.randint(1, 49))
             my_list = list
-            sorted_list = my_list
-            return sorted_list
+            my_list.sort()
+            return my_list
     #Takes PARAM x and recurses until it reaches base condition x = 0
 
 
