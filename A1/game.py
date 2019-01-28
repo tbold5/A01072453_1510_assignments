@@ -8,10 +8,10 @@ def rock_paper_scissors():
         PRE: user must put the right input
         POST: prints out computers choice and lets the player know who won
     """
-    initial_input = input("Please choose one of the following: 'ROCK' 'PAPER' or 'SCISSOR': ")
+    initial_input = str(input("Please choose one of the following: 'ROCK' 'PAPER' or 'SCISSOR': "))
     strip_input = initial_input.strip()
     user_input = strip_input.lower()
-    my_list = ["rock", "paper", "scissors"]
+    my_list = ['rock', 'paper', 'scissor']
 
     #Use random module to give random int between 0-2
     random_int = random.randint(0, 2)
@@ -23,16 +23,16 @@ def rock_paper_scissors():
         print("The computer choose PAPER: YOU LOSE")
     elif user_input == 'rock' and computer_input == 'scissor':
         print("The computer choose SCISSOR: YOU WIN")
-    elif user_input == "scissor" and computer_input == 'rock':
+    elif user_input == 'scissor' and computer_input == 'rock':
         print("The computer choose ROCK: YOU LOSE")
-    elif user_input == "scissor" and computer_input == 'paper':
+    elif user_input == 'scissor' and computer_input == 'paper':
         print("The computer choose PAPER: YOU WIN")
-    elif user_input == "paper" and computer_input == 'rock':
+    elif user_input == 'paper' and computer_input == 'rock':
         print("The computer choose ROCK: YOU WIN")
-    elif user_input == "paper" and computer_input == 'scissor':
+    elif user_input == 'paper' and computer_input == 'scissor':
         print("The computer choose SCISSOR: YOU LOSE")
     elif user_input == computer_input:
-        print("TIE!")
+        print('The computer choose: ' + computer_input.upper() + ' , IT`S A TIE!')
     else:
         print("You did not pick the right input, choose from 'ROCK' 'PAPER' 'SCISSOR'")
 
