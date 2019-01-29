@@ -6,9 +6,9 @@ def time_calculator(seconds):
        PRE: number must be an integer
        RETURN: returns number of days, hours, minutes and seconds as integer in a list
     """
-    minute = int(seconds) // 60
-    hour = int(seconds) // 3600
     day = int(seconds) // 86400
+    hour = int(seconds) // 3600
+    minute = int(seconds) // 60
     seconds = int(seconds)
     my_list = [day, hour, minute, seconds]
 
