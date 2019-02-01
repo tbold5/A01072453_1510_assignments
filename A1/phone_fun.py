@@ -33,6 +33,7 @@ def number_translator():
     elif upper_input == "1":
         empty_list.append("1")
 
+    #Another function that converts the whole string.
 
     return empty_list
 

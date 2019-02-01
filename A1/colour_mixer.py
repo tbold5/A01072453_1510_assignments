@@ -9,11 +9,8 @@ def colour_mixer():
     chosen_colour_1 = input("Please choose first primary colour from RED, YELLOW or BLUE: ")
     chosen_colour_2 = input("Please choose first secondary colour from RED, YELLOW or BLUE: ")
 
-    #Use "strip" method to get rid of useless whitespace.
     strip_colour_1 = chosen_colour_1.strip()
     strip_colour_2 = chosen_colour_2.strip()
-
-    #Use "lower" method to turn any inputs to lowercase.
     input_colour_1 = strip_colour_1.lower()
     input_colour_2 = strip_colour_2.lower()
 
