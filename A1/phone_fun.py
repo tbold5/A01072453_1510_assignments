@@ -2,41 +2,55 @@ def number_translator():
     """Translates alphabetical numbers
 
     A function that translates alphabetical numbers into numerical quivalent.
-    PRE: promt user to input 10 character telephone number in the format XXX-XXX-XXXX
-    POST: translate alphabetical numbers into numerical equivalents.
+    PRECONDITION: promt user to input 10 character telephone number in the format XXX-XXX-XXXX
+    POSTCONDITION: translate alphabetical numbers into numerical equivalents.
     RETURN: returns string in the format below.
 
     """
 
-    initial_input = input("Please enter 10-character phone number in the format XXX-XXX-XXXX: ")
-    space_input = initial_input.strip()
-    upper_input = space_input.upper()
-    empty_list = []
+    user_input = input("Please enter 10-character phone number in the format XXX-XXX-XXXX: ").upper()
+    new_number = str(letter_translator(user_input[0])) + str(letter_translator(user_input[1])) \
+                 + str(letter_translator(user_input[2])) + str(letter_translator(user_input[3])) \
+                 + str(letter_translator(user_input[4])) + str(letter_translator(user_input[5])) \
+                 + str(letter_translator(user_input[6])) + str(letter_translator(user_input[7])) \
+                 + str(letter_translator(user_input[8])) + str(letter_translator(user_input[9])) \
+                 + str(letter_translator(user_input[10])) + str(letter_translator(user_input[11]))
+    return new_number
 
-    if initial_input == "A" or upper_input == "B" or upper_input == "C" or upper_input == "2":
-        empty_list.append("2")
-    elif upper_input == "D" or upper_input == "E" or upper_input == "F" or upper_input == "3":
-        empty_list.append("3")
-    elif upper_input == "G" or upper_input == "H" or upper_input == "I" or upper_input == "4":
-        empty_list.append("4")
-    elif upper_input == "J" or upper_input == "K" or upper_input == "L" or upper_input == "5":
-        empty_list.append("5")
-    elif upper_input == "M" or upper_input == "N" or upper_input == "O" or upper_input == "6":
-        empty_list.append("6")
-    elif upper_input == "P" or upper_input == "Q" or upper_input == "R" or upper_input == "7":
-        empty_list.append("7")
-    elif upper_input == "T" or upper_input == "U" or upper_input == "V" or upper_input =="8":
-        empty_list.append("8")
-    elif upper_input == "W" or upper_input == "X" or upper_input == "Y"\
-            or upper_input == "Z" or upper_input == "9":
-        empty_list.append("9")
-    elif upper_input == "1":
-        empty_list.append("1")
-
-    #Another function that converts the whole string.
-
-    return empty_list
-
+def letter_translator(letter):
+    list = [["0"],
+            ["1"],
+            ["2", "A", "B", "C"],
+            ["3", "D", "E", "F"],
+            ["4", "G", "H", "I"],
+            ["5", "J", "K", "L"],
+            ["6", "M", "N", "O"],
+            ["7", "P", "Q", "R", "S"],
+            ["8", "T", "U", "V"],
+            ["9", "W", "X", "Y", "Z"],
+            ["-"]]
+    if letter in list[0]:
+        return "0"
+    elif letter in list[1]:
+        return "1"
+    elif letter in list[2]:
+        return "2"
+    elif letter in list[3]:
+        return "3"
+    elif letter in list[4]:
+        return "4"
+    elif letter in list[5]:
+        return "5"
+    elif letter in list[6]:
+        return "6"
+    elif letter in list[7]:
+        return "7"
+    elif letter in list[8]:
+        return "8"
+    elif letter in list[9]:
+        return "9"
+    elif letter in list[10]:
+        return "-"
 
 def main():
     print((number_translator()))

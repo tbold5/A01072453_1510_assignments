@@ -1,10 +1,11 @@
 def colour_mixer():
-    """Generate a secondary colour
+    """Generate a secondary colour.
 
-        A function that takes two primary colours and generates new secondary colour.
-        PARAM: string, a primary colour
-        PRE: string must be a primary colour: Red, Yellow or Blue
-        POST: string, prints the correct secondary colour and correct error message.
+    A function that takes two primary colours and generates new secondary colour.
+    PARAM: string, a primary colour.
+    PRECONDITION: string must be a primary colour: Red, Yellow or Blue.
+    POSTCONDITION: string, prints the correct secondary colour and correct error message.
+    >>>colour_mixer()
     """
     chosen_colour_1 = input("Please choose first primary colour from RED, YELLOW or BLUE: ")
     chosen_colour_2 = input("Please choose first secondary colour from RED, YELLOW or BLUE: ")

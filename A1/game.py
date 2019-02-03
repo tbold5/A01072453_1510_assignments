@@ -1,12 +1,12 @@
 import random
 
 def rock_paper_scissors():
-    """Play Rock Paper Scissor
+    """Play Rock Paper Scissor.
 
-        A function that allows players to play rock paper scissors with the computer
-        PARAM: prompt user to put rock, paper or scissor
-        PRE: user must put the right input
-        POST: prints out computers choice and lets the player know who won
+    A function that allows players to play rock paper scissors with the computer.
+    PARAM: prompt user to put rock, paper or scissor.
+    PRECONDITION: user must put the right input.
+    POSTCONDITION: prints out computers choice and lets the player know who won.
     """
     initial_input = str(input("Please choose one of the following: 'ROCK' 'PAPER' or 'SCISSOR': "))
     strip_input = initial_input.strip()
