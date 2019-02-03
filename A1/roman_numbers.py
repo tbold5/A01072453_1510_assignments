@@ -1,11 +1,17 @@
 def convert_to_roman_numeral(positive_int):
-    """Convert an integer to a Roman numeral
+    """Convert an integer to a Roman numeral.
 
-        A function to converts number to Roman numeral.
-        PARAM: number, a positive integer
-        PRECONDITION: number must be positive integer
-        POSTCONDITION: converts roman numeral
-        RETURN: Roman numeral as a string
+    A function to converts number to Roman numeral.
+    PARAM: number, a positive integer.
+    PRECONDITION: number must be positive integer in the range 1 - 10,000.
+    POSTCONDITION: converts roman numeral.
+    RETURN: Roman numeral as a string.
+    >>>convert_to_roman_numeral(9000)
+    MMMMMMMMM
+    >>>convert_to_roman_numeral(5)
+    V
+    >>>convert_to_roman_numeral(2019)
+    MMXIX
     """
     list_num_ones = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
     list_num_tens = ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C"]
@@ -51,11 +57,10 @@ def convert_to_roman_numeral(positive_int):
         positive_int = positive_int % 4
     if positive_int // 1 > 0:
         roman_numeral += (positive_int // 1) * "I"
-    else:
-        return roman_numeral
+    return roman_numeral
 
 def main():
-    print(convert_to_roman_numeral(450))
+    print(convert_to_roman_numeral(11))
 
 if __name__ == "__main__":
     main()
