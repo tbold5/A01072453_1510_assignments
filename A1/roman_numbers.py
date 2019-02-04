@@ -1,24 +1,32 @@
+"""COMP 1510 Assignment 1: Roman Converter!"""
+
+# Trae Bold
+# A01072453
+# Feb 03, 2019
+
+import doctest
+
+
 def convert_to_roman_numeral(positive_int):
     """Convert an integer to a Roman numeral.
 
     A function to converts number to Roman numeral.
     PARAM: number, a positive integer.
-    PRECONDITION: number must be positive integer in the range 1 - 10,000.
+    PRECONDITION: number must be positive integer in the range 1 - 10,000 and must not be 0.
     POSTCONDITION: converts roman numeral.
     RETURN: Roman numeral as a string.
-    >>>convert_to_roman_numeral(9000)
-    MMMMMMMMM
-    >>>convert_to_roman_numeral(5)
-    V
-    >>>convert_to_roman_numeral(2019)
-    MMXIX
+
+    >>> convert_to_roman_numeral(2019)
+    'MMXIX'
+    >>> convert_to_roman_numeral(13)
+    'XIII'
+    >>> convert_to_roman_numeral(9639)
+    'MMMMMMMMMDCXXXIX'
     """
-    list_num_ones = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
-    list_num_tens = ["X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C"]
-    list_num_hundreds = ["C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM", "M"]
-    list_num_thousands = ["M", "MM", "MMM", "MMMM", "MMMMM", "MMMMMM", "MMMMMMM", "MMMMMMMM", "MMMMMMMMM", "MMMMMMMMMM"]
 
     roman_numeral = ''
+    # if positive_int == 0:
+    #     print("nulla")
     if positive_int // 1000 > 0:
         roman_numeral += (positive_int // 1000) * "M"
         positive_int = positive_int % 1000
@@ -59,8 +67,11 @@ def convert_to_roman_numeral(positive_int):
         roman_numeral += (positive_int // 1) * "I"
     return roman_numeral
 
+
 def main():
-    print(convert_to_roman_numeral(11))
+    print(convert_to_roman_numeral(2019))
+
 
 if __name__ == "__main__":
     main()
+    doctest.testmod()
