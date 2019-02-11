@@ -133,6 +133,32 @@ def generate_syllable():
     return random_syllable
 
 
+def class_creator():
+    """Print character classes.
+
+    A function that prints out all possbile character classes for user to choose.
+    """
+    class_list = {'Barbarian': 12, 'Bard': 8, 'Cleric': 8, 'Druid': 8, 'Fighter': 10, 'Monk': 8, 'Paladin': 10,
+                  'Ranger': 10, 'Rogue': 8, 'Sorcerer': 6, 'Warlock': 8, 'Wizard': 6, 'Blood Hunter': 10}
+    print(class_list)
+    user_class = input('Please choose your character class from the following list: ').title()
+    if user_class not in class_list:
+        return 'Please Choose Character Class from the list!'
+    else:
+        return user_class
+
+
+def class_dictionary():
+    """Return Class Dictionary.
+
+    A function that returns dictionary of character classes.
+    RETURN: character class dictionary.
+    """
+    class_list = {'barbarian': 12, 'bard': 8, 'cleric': 8, 'druid': 8, 'fighter': 10, 'monk': 8, 'paladin': 10,
+                  'ranger': 10, 'rogue': 8, 'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood Hunter': 10}
+    return class_list
+
+
 def main():
     print(create_character(3))
 
