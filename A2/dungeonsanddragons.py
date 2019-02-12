@@ -1,6 +1,10 @@
+"""COMP1510 Assignment #2"""
+
+# Trae Bold
+# A01072453
+# JAN 11, 2019
+
 import random
-import string
-import doctest
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -64,7 +68,7 @@ def create_character(name_length):
         my_character = {}
         my_character['Name'] = generate_name(name_length)
         my_character['Class'] = class_creator().lower()
-        my_character['HP'] = roll_die(1, class_dictionary()[my_character['Class']])
+        my_character['HP'] = 5 * roll_die(1, class_dictionary()[my_character['Class']])
         my_character['Strength'] = roll_die(3, 6)
         my_character['Dexterity'] = roll_die(3, 6)
         my_character['Constitution'] = roll_die(3, 6)
@@ -161,47 +165,66 @@ def class_dictionary():
 
 
 def first_striker():
+    """Determine first striker
+
+    A function that decides which player to attack first by rolling out two random numbers between 1 - 20.
+    RETURN: returns True value when opponent_1 is more than opponent_2, else False.
+    """
     opponent_1 = roll_die(1, 20)
     opponent_2 = roll_die(1, 20)
-    if opponent_1 > opponent_2:
-        
+    if opponent_1 == opponent_2:
+        first_striker()
+    elif opponent_1 > opponent_2:
+        return True
+    else:
+        return False
 
 
 def combat_round(opponent_one, opponent_two):
     """Fight characters.
 
     A function that represents single round of combat between two characters using their dictionaries.
-    PARAM: opponent_one,
-    PARAM: opponent_two,
+    PARAM: opponent_one, correctly implemented dictionary.
+    PARAM: opponent_two, correctly implemented dictionary.
     PRECONDITION: opponent_one, dictionary containing correct character.
     PRECONDITION: opponent_two, dictionary containing correct character.
     """
-    player_1_die = roll_die(1, 20)
-    player_2_die = roll_die(1, 20)
-    if player_1_die > player_2_die:
-        print('Player_1 will attack first!')
-        if player_1_die > opponent_two['Dexterity']:
-            print('Player_1 has struck Player_2 ')
-            opponent_two['HP'] - roll_die(1, 10)
-        else:
-            print('Player_1 missed the attack!')
-        if player_2_die['HP'] > 0:
-            if player_2_die > opponent_one['Dexterity']:
-                print('Player_2 has struck Player_1')
-                opponent_one['HP'] - roll_die(1, 10)
-            else:
-                print('Player_2 missed the attack')
-    elif player_1_die < player_2_die:
-        print('Player_2 will attack first!')
-    elif player_1_die == player_2_die:
-        return 'Roll die again'
+    if first_striker():
+        attacker = opponent_one
+        defender = opponent_two
+    else:
+        attacker = opponent_two
+        defender = opponent_one
 
-    if play
+    if roll_die(1, 20) > defender['Dexterity']:
+        damage = roll_die(1, class_dictionary()[attacker['Class']])
+        defender['HP'] -= damage
+        print(attacker['Name'], 'attacked ', defender['Name'], ', ', defender['Name'], "current HP is: ", defender['HP'])
+        if defender['HP'] <= 0:
+            print(defender['Name'], 'is dead!', attacker['Name'], 'is the winner!')
+    else:
+        print(attacker['Name'], " missed the attack!")
+    if defender['HP'] > 0:
+        if roll_die(1, 20) > attacker['Dexterity']:
+            damage = roll_die(1, class_dictionary()[defender['Class']])
+            attacker['HP'] -= damage
+            print(defender['Name'], 'attacked ', attacker['Name'], ', ', attacker['Name'], 'current HP is: ',
+                  attacker['HP'])
+            if attacker['HP'] <= 0:
+                print(attacker['Name'], 'is dead!', defender['Name'], 'is the winner!')
+        else:
+            print(defender['Name'], " missed the attack!")
+
 
 def main():
-    print(create_character(3))
+    player_1 = create_character(2)
+    player_2 = create_character(4)
+    print(player_1)
+    print(player_2)
+    while player_1['HP'] > 0 and player_2['HP'] > 0:
+        combat_round(player_1, player_2)
 
 
 if __name__ == "__main__":
     main()
-    doctest.testmod()
+
