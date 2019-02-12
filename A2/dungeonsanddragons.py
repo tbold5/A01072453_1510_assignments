@@ -1,5 +1,6 @@
 import random
 import string
+import doctest
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -159,9 +160,48 @@ def class_dictionary():
     return class_list
 
 
+def first_striker():
+    opponent_1 = roll_die(1, 20)
+    opponent_2 = roll_die(1, 20)
+    if opponent_1 > opponent_2:
+        
+
+
+def combat_round(opponent_one, opponent_two):
+    """Fight characters.
+
+    A function that represents single round of combat between two characters using their dictionaries.
+    PARAM: opponent_one,
+    PARAM: opponent_two,
+    PRECONDITION: opponent_one, dictionary containing correct character.
+    PRECONDITION: opponent_two, dictionary containing correct character.
+    """
+    player_1_die = roll_die(1, 20)
+    player_2_die = roll_die(1, 20)
+    if player_1_die > player_2_die:
+        print('Player_1 will attack first!')
+        if player_1_die > opponent_two['Dexterity']:
+            print('Player_1 has struck Player_2 ')
+            opponent_two['HP'] - roll_die(1, 10)
+        else:
+            print('Player_1 missed the attack!')
+        if player_2_die['HP'] > 0:
+            if player_2_die > opponent_one['Dexterity']:
+                print('Player_2 has struck Player_1')
+                opponent_one['HP'] - roll_die(1, 10)
+            else:
+                print('Player_2 missed the attack')
+    elif player_1_die < player_2_die:
+        print('Player_2 will attack first!')
+    elif player_1_die == player_2_die:
+        return 'Roll die again'
+
+    if play
+
 def main():
     print(create_character(3))
 
 
 if __name__ == "__main__":
     main()
+    doctest.testmod()
