@@ -101,6 +101,7 @@ def generate_name(syllable_length):
     RETURN:
     """
     syllable = ''
+
     for i in range(syllable_length):
         syllable += generate_syllable()
     return syllable.title()
@@ -147,6 +148,7 @@ def class_creator():
                   'Ranger': 10, 'Rogue': 8, 'Sorcerer': 6, 'Warlock': 8, 'Wizard': 6, 'Blood Hunter': 10}
     print(class_list)
     user_class = input('Please choose your character class from the following list: ').title()
+
     if user_class not in class_list:
         return 'Please Choose Character Class from the list!'
     else:
@@ -172,6 +174,7 @@ def first_striker():
     """
     opponent_1 = roll_die(1, 20)
     opponent_2 = roll_die(1, 20)
+
     if opponent_1 == opponent_2:
         first_striker()
     elif opponent_1 > opponent_2:
@@ -204,6 +207,7 @@ def combat_round(opponent_one, opponent_two):
             print(defender['Name'], 'is dead!', attacker['Name'], 'is the winner!')
     else:
         print(attacker['Name'], " missed the attack!")
+
     if defender['HP'] > 0:
         if roll_die(1, 20) > attacker['Dexterity']:
             damage = roll_die(1, class_dictionary()[defender['Class']])
