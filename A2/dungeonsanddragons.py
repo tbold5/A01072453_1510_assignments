@@ -5,6 +5,7 @@
 # JAN 11, 2019
 
 import random
+import doctest
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -16,10 +17,16 @@ def roll_die(number_of_rolls, number_of_sides):
     PRECONDITION: number_of_rolls must be a positive integer or the function returns 0.
     PRECONDITION: number_of_sides must be a positive integer or the function returns 0.
     RETURN: random total of number_of_rolls and random_of_sides.
+    >>> random.seed(1)
+    >>> roll_die(1, 6)
+    2
     """
 
     result = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
-    return result
+    if number_of_rolls < 0 and number_of_sides < 0:
+        return 0
+    else:
+        return result
 
 
 def choose_inventory(inventory, selection):
@@ -68,7 +75,7 @@ def create_character(name_length):
         my_character = {}
         my_character['Name'] = generate_name(name_length)
         my_character['Class'] = class_creator().lower()
-        my_character['HP'] = 5 * roll_die(1, class_dictionary()[my_character['Class']])
+        my_character['HP'] = roll_die(1, class_dictionary()[my_character['Class']])
         my_character['Strength'] = roll_die(3, 6)
         my_character['Dexterity'] = roll_die(3, 6)
         my_character['Constitution'] = roll_die(3, 6)
@@ -77,7 +84,7 @@ def create_character(name_length):
         my_character['Charisma'] = roll_die(3, 6)
         my_character['XP'] = 0
         my_character['Inventory'] \
-            = choose_inventory(0, int(input('Choose number of items between 1 - 9 to fight the Dragon!: ')))
+            = choose_inventory(0, int(input('Choose number of INVENTORY ITEMS between 1 - 9: ')))
 
         return my_character
 
@@ -94,11 +101,14 @@ def print_character(character):
 def generate_name(syllable_length):
     """Generate name.
 
-    A function that generates syllables consisting consoanant followed by vowels.
-    PARAM: syllables, a positive integer.
+    A function that generates syllables consisting consonant followed by vowels.
+    PARAM: syllable_length, a positive integer.
     PRECONDITION: syllables must be positive non-zero integers.
     POSTCONDITION: syllable must consist consonant followed by vowels.
     RETURN:
+    >>> random.seed(1)
+    >>> generate_name(2)
+    'Gudi'
     """
     syllable = ''
 
@@ -112,6 +122,9 @@ def generate_vowel():
 
     A function that generates vowel including y.
     RETURN: single vowel.
+    >>> random.seed(1)
+    >>> generate_vowel()
+    'e'
     """
     vowels = "aeiouy"
     random_vowels = random.choice(vowels)
@@ -123,6 +136,9 @@ def generate_consonant():
 
     A function that generates consonant including y.
     RETURN: single consonant.
+    >>> random.seed(1)
+    >>> generate_consonant()
+    'g'
     """
     consonant = "bcdfghjklmnpqrstvxzwy"
     random_consonant = random.choice(consonant)
@@ -134,6 +150,9 @@ def generate_syllable():
 
     A function that creates syllable using generate_consonant and generate_vowel functions.
     RETURN: concatenated syllable consisting consonant followed by vowel.
+    >>> random.seed(1)
+    >>> generate_syllable()
+    'gu'
     """
     random_syllable = generate_consonant() + generate_vowel()
     return random_syllable
@@ -142,15 +161,17 @@ def generate_syllable():
 def class_creator():
     """Print character classes.
 
-    A function that prints out all possbile character classes for user to choose.
+    A function that prints out all possible character classes for user to choose.
     """
-    class_list = {'Barbarian': 12, 'Bard': 8, 'Cleric': 8, 'Druid': 8, 'Fighter': 10, 'Monk': 8, 'Paladin': 10,
-                  'Ranger': 10, 'Rogue': 8, 'Sorcerer': 6, 'Warlock': 8, 'Wizard': 6, 'Blood Hunter': 10}
-    print(class_list)
-    user_class = input('Please choose your character class from the following list: ').title()
+    class_list = {'barbarian': 12, 'bard': 8, 'cleric': 8, 'druid': 8, 'fighter': 10, 'monk': 8, 'paladin': 10,
+                  'ranger': 10, 'rogue': 8, 'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood hunter': 10}
+    for keys in class_list:
+        print(keys.title())
+    user_class = input('Please choose your character CLASS from the following list: ').strip()
 
     if user_class not in class_list:
-        return 'Please Choose Character Class from the list!'
+        print('Please choose valid class from the list!')
+        return class_creator()
     else:
         return user_class
 
@@ -162,12 +183,12 @@ def class_dictionary():
     RETURN: character class dictionary.
     """
     class_list = {'barbarian': 12, 'bard': 8, 'cleric': 8, 'druid': 8, 'fighter': 10, 'monk': 8, 'paladin': 10,
-                  'ranger': 10, 'rogue': 8, 'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood Hunter': 10}
+                  'ranger': 10, 'rogue': 8, 'sorcerer': 6, 'warlock': 8, 'wizard': 6, 'blood hunter': 10}
     return class_list
 
 
 def first_striker():
-    """Determine first striker
+    """Determine first striker.
 
     A function that decides which player to attack first by rolling out two random numbers between 1 - 20.
     RETURN: returns True value when opponent_1 is more than opponent_2, else False.
@@ -176,10 +197,16 @@ def first_striker():
     opponent_2 = roll_die(1, 20)
 
     if opponent_1 == opponent_2:
+        print('Player 1 has rolled: ', opponent_1, '\n'
+              'Player 2 has rolled: ', opponent_2, '\n' 'IT is a TIE!')
         first_striker()
     elif opponent_1 > opponent_2:
+        print('Player 1 has rolled: ', opponent_1, '\n'
+              'Player 2 has rolled: ', opponent_2, '\n' 'Player 1 STRIKES first!', '\n', 20 * '-')
         return True
     else:
+        print('Player 1 has rolled: ', opponent_1, '\n'
+              'Player 2 has rolled: ', opponent_2, '\n' 'Player 2 STRIKES first!', '\n', 20 * '-')
         return False
 
 
@@ -199,36 +226,44 @@ def combat_round(opponent_one, opponent_two):
         attacker = opponent_two
         defender = opponent_one
 
-    if roll_die(1, 20) > defender['Dexterity']:
+    roll_number_1 = roll_die(1, 20)
+
+    if roll_number_1 > defender['Dexterity']:
         damage = roll_die(1, class_dictionary()[attacker['Class']])
         defender['HP'] -= damage
-        print(attacker['Name'], 'attacked ', defender['Name'], ', ', defender['Name'], "current HP is: ", defender['HP'])
+        print(attacker['Name'], 'STRUCK', defender['Name'], ', ', attacker['Name'], 'DEALT:', damage, 'DAMAGE'
+              ', ', defender['Name'], "current HP is: ", defender['HP'], ', ' 'ATTACK successful!\n', '-' * 100)
         if defender['HP'] <= 0:
             print(defender['Name'], 'is dead!', attacker['Name'], 'is the winner!')
     else:
-        print(attacker['Name'], " missed the attack!")
+        print(attacker['Name'], 'MISSED the attack', ', ', defender['Name'], 'DODGED\n',
+              attacker['Name'], "ATTACK unsuccessful!")
+
+    roll_number_2 = roll_die(1, 20)
 
     if defender['HP'] > 0:
-        if roll_die(1, 20) > attacker['Dexterity']:
+        if roll_number_2 > attacker['Dexterity']:
             damage = roll_die(1, class_dictionary()[defender['Class']])
             attacker['HP'] -= damage
-            print(defender['Name'], 'attacked ', attacker['Name'], ', ', attacker['Name'], 'current HP is: ',
-                  attacker['HP'])
+            print(defender['Name'], 'STRUCK', attacker['Name'], ', ', defender['Name'], 'DEALT:', damage, 'DAMAGE',
+                  ', ', attacker['Name'], "current HP is: ", attacker['HP'], ', ', 'ATTACK successful!\n', '-' * 100)
             if attacker['HP'] <= 0:
                 print(attacker['Name'], 'is dead!', defender['Name'], 'is the winner!')
         else:
-            print(defender['Name'], " missed the attack!")
+            print(defender['Name'], 'MISSED the attack', ', ', attacker['Name'], 'DODGED\n',
+                  defender['Name'], "ATTACK unsuccessful!")
 
 
 def main():
-    player_1 = create_character(2)
-    player_2 = create_character(4)
-    print(player_1)
-    print(player_2)
-    while player_1['HP'] > 0 and player_2['HP'] > 0:
-        combat_round(player_1, player_2)
+    print('Player 1: ')
+    player_1 = create_character(int(input('Choose NUMBER of syllable for character NAME: ')))
+    print('Player 2: ')
+    player_2 = create_character(int(input('Choose NUMBER of syllable for character NAME: ')))
+    print('Player 1: ', player_1)
+    print('Player 2: ', player_2)
+    combat_round(player_1, player_2)
 
 
 if __name__ == "__main__":
     main()
-
+    doctest.testmod()

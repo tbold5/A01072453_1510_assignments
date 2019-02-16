@@ -2,6 +2,7 @@ from unittest import TestCase
 from dungeonsanddragons import class_dictionary
 import random
 
+
 class TestClass_dictionary(TestCase):
     def test_class_dictionary_print(self):
         expected = {'barbarian': 12,
