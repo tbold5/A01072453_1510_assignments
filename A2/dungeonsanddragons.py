@@ -95,7 +95,8 @@ def print_character(character):
     A function that prints create character function.
     PARAM: list, character
     """
-    return create_character(character)
+    for key, value in character.items():
+        print(key, value)
 
 
 def generate_name(syllable_length):
@@ -259,8 +260,13 @@ def main():
     player_1 = create_character(int(input('Choose NUMBER of syllable for character NAME: ')))
     print('Player 2: ')
     player_2 = create_character(int(input('Choose NUMBER of syllable for character NAME: ')))
-    print('Player 1: ', player_1)
-    print('Player 2: ', player_2)
+    print('-' * 80)
+    print('PLAYER 1: ')
+    print_character(player_1)
+    print('-' * 80)
+    print('PLAYER 2: ')
+    print_character(player_2)
+    print('-' * 80)
     combat_round(player_1, player_2)
 
 
