@@ -1,6 +1,6 @@
 from random import randint
 
-monster = {'Name': 'Chocolatator', 'HP': 0, 'Damage:': 0}
+monster = {'Name': 'Chocolatator', 'HP': 5, 'Damage:': 0}
 
 
 def get_name():

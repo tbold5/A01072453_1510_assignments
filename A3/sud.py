@@ -7,37 +7,10 @@
 import random
 import sys
 import copy
+import my_character
 
 
-def roll_die(number_of_rolls, number_of_sides):
-    """Roll a die.
 
-    A function that simulates rolling die of the specified size and the number of times.
-    PARAM: int, number_of_rolls.
-    PARAM: int, number_of_sides.
-    PRECONDITION: number_of_rolls must be a positive integer or the function returns 0.
-    PRECONDITION: number_of_sides must be a positive integer or the function returns 0.
-    RETURN: random total of number_of_rolls and random_of_sides.
-    >>> random.seed(1)
-    >>> roll_die(1, 6)
-    2
-    """
-
-    result = random.randint(1 * number_of_rolls, number_of_sides * number_of_rolls)
-    if number_of_rolls < 0 and number_of_sides < 0:
-        return 0
-    else:
-        return result
-
-
-def kitty_character():
-    my_character = {}
-    my_character['HP'] = 10
-    my_character['Maxhealth'] = 10
-    my_character['Damage'] = roll_die(1, 6)
-    my_character['Position'] = [1, 1]
-    # my_character['Name'] = input('Please choose a name for you Hello Kitty: ').title()
-    return my_character
 
 
 def candy_monster():
