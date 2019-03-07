@@ -153,7 +153,7 @@ def flee_from_monster():
     A function that prints helpful message and updates character HP with 10% chance."""
     if randint(1, 10) == 1:
         character.flee_decrease_hp()
-        print('Candy monster bit you while you escaped\r\r')
+        print('Candy monster struck you while you escaped\r\r')
         print('Your Current HP is: ', character.get_hp())
 
         if character.get_hp() <= 0:
@@ -170,11 +170,11 @@ def combat_to_death():
 
     while character.get_hp() > 0 and monster.get_hp() > 0:
         monster.decrease_hp()
-        print(character.get_name(), 'BIT', monster.get_name(), ', ', character.get_name(), 'DEALT DAMAGE',
+        print(character.get_name(), 'STRUCK', monster.get_name(), ', ', character.get_name(), 'DEALT DAMAGE',
               ', ', monster.get_name(), "current HP is: ", monster.get_hp())
 
         if monster.get_hp() <= 0:
-            print(character.get_name(), ' successfully ate the monster!\n\n')
+            print(character.get_name(), ' successfully killed the monster!\n\n')
             story.print_candy_reward()
             print('\n\n')
             print(character.get_name(), 'current HP is: ', character.get_hp())
