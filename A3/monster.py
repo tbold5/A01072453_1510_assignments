@@ -9,29 +9,27 @@ def get_name():
     return monster['Name']
 
 
+def get_hp():
+    """Gets the HP from the dictionary."""
+
+    return monster['HP']
+
+
 def get_damage():
     """Gets the damage from the dictionary."""
 
     return monster['Damage']
 
 
-def set_encounter_damage():
-    """Sets the encounter damage for the dictionary."""
-
-    global monster
-    monster['Damage'] = randint(1, 6)
-
-
-def set_flee_damage():
-    """Sets the flee damage for the dictionary."""
-
-    global monster
-    monster['Damage'] = randint(1, 4)
-
-
 def get_monster():
     """Gets monster keys and values from the dictionary."""
     return monster
+
+
+def decrease_hp():
+    """Decrease HP by random numbers between 1 - 6."""
+    global monster
+    monster['HP'] -= randint(1, 6)
 
 
 def main():
