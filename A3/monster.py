@@ -1,3 +1,10 @@
+"""COMP1510 Assignment # 3: Your First SUD!"""
+
+# Trae Bold
+# A01072453
+# JAN 11, 2019
+
+
 from random import randint
 
 monster = {'Name': 'Chocolatator', 'HP': 5, 'Damage:': 0}

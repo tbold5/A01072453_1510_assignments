@@ -1,3 +1,10 @@
+"""COMP1510 Assignment # 3: Your First SUD!"""
+
+# Trae Bold
+# A01072453
+# JAN 11, 2019
+
+
 from random import randint
 
 character = {'Name': '', 'HP': 10, 'Damage:': 0, 'Position': [0, 0]}
@@ -13,7 +20,7 @@ def set_name():
     """Sets the name for the dictionary."""
 
     global character
-    character['Name'] = input('What is your name?: ').title()
+    character['Name'] = input('What is your name Kitty?: ').title()
 
 
 def get_hp():
