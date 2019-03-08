@@ -17,18 +17,19 @@ def create_map():
     A function that creates game map and displays it to user to
     show their current location."""
 
-    # Create map structure.
+    # Create a map structure using list comprehension.
     game_map = [['  ' for x in range(8)] for _ in range(8)]
 
     # Set Character position.
     character_icon = '🐰'
     game_map[character.get_position()[0]][character.get_position()[1]] = character_icon
 
-    # Prints the row of the board
+    # Prints each row of the board
     print("""🍭🍭🍭  MAP OF HERSHEY KINGDOM🏰  🍭🍭🍭""")
     for row in game_map:
-
-        print(row)
+        # for column in row:
+        #     print(column)
+        print(' 🍬 '.join(row))
 
     return game_map
 
@@ -54,31 +55,47 @@ def user_command():
         user_command()
 
 
-def check_boundary(user_choice: int):
+def is_valid_move(user_choice: int):
     """Check map boundary.
 
     A function that takes user command and returns boolean value and prints helpful message when user reaches
     the map boundary."""
 
-    if (user_choice == 1 and character.get_position()[0] == 0) \
-            or (user_choice == 2 and character.get_position()[0]) == 7:
-                print('⛔⛔⛔ You have hit the candy wall! ⛔⛔⛔')
-                return False
+    if user_choice == 1 and character.get_position()[0] == 0:
+        print('⛔⛔⛔ You have hit the candy wall! ⛔⛔⛔')
+        return False
 
-    elif (user_choice == 4 and character.get_position()[1] == 0) \
-            or (user_choice == 3 and character.get_position()[1] == 7):
-                print('⛔⛔⛔ You hit the candy wall! ⛔⛔⛔')
-                return False
+    if user_choice == 2 and character.get_position()[0] == 7:
+        print('⛔⛔⛔ You have hit the candy wall! ⛔⛔⛔')
+        return False
+
+    if user_choice == 4 and character.get_position()[1] == 0:
+        print('⛔⛔⛔ You hit the candy wall! ⛔⛔⛔')
+        return False
+
+    if user_choice == 3 and character.get_position()[1] == 7:
+        print('⛔⛔⛔ You hit the candy wall! ⛔⛔⛔')
+        return False
 
     return True
 
 
-def move_character(user_choice: int, boundary: bool, encounter: bool):
+def is_max_health():
+    """Check character max health.
+
+    A function that return boolean value depending on character HP."""
+    if character.get_hp() == 10:
+        return True
+
+    return False
+
+
+def move_character(user_choice: int, max_hp: bool, valid_move=True):
     """Move Character.
 
     A function that takes user command and updates character position, takes boolean values to determine
     if user HP increases or not."""
-    if check_boundary(user_choice):
+    if is_valid_move(user_choice):
 
         if user_choice == 1:
             character.set_position()[0] -= 1
@@ -95,27 +112,30 @@ def move_character(user_choice: int, boundary: bool, encounter: bool):
         elif user_choice == 5:
             story.print_exit()
             print('Thank you for playing\n\n')
+            character.save_character()
             sys.exit()
         else:
             print('Invalid input')
 
             create_map()
-    if (boundary is False) and (encounter is False):
-        character.increase_hp()
-    else:
-        None
 
-    monster_encounter()
+    # Increase HP only when character is <= 10 HP and is within the map.
+    if not max_hp and valid_move:
+        character.increase_hp()
+
+    # monster_encounter()
     # 19-> lines
 
 
-def monster_encounter_chance():
+def is_encounter_monster():
     """Calculate encounter chance.
 
     A function that returns True value with 10% chance."""
 
-    if randint(1, 10) == 1:
+    if randint(1, 2) == 1:
         return True
+
+    return False
 
 
 def monster_encounter():
@@ -123,11 +143,11 @@ def monster_encounter():
 
     A function that prompts user to make choice and calls other functions depending on their choice. """
     try:
-        if monster_encounter_chance():
+        if is_encounter_monster():
             print('You have encountered a monster!!\n')
             story.print_monster()
             print('\n\n')
-            user_choice = int(input('(1) Attack Monster? / (2) Flee?\n').lower())
+            user_choice = int(input('(1) Attack Monster? / (2) Flee?\n'))
 
             if user_choice == 1:
                 combat_to_death()
@@ -135,15 +155,12 @@ def monster_encounter():
             elif user_choice == 2:
                 flee_from_monster()
 
-            else:
-                print('Sorry I did not understand you\n\n')
-                monster_encounter()
     # Catch Error when user inputs letters.
     except ValueError:
         print('*' * 50)
         print('Please provide a number instead of a letter!')
         print('*' * 50)
-        pass
+        monster_encounter()
         # 18-> lines
 
 
@@ -158,7 +175,7 @@ def flee_from_monster():
 
         if character.get_hp() <= 0:
             print('Your Current HP is: ', character.get_hp())
-            print('You died out of DIABETES\n\n!')
+            print('You died out of DIABETES!\n\n')
     else:
         print('You successfully escaped from the Candy Monster\r\r')
 
@@ -187,22 +204,42 @@ def combat_to_death():
             if character.get_hp() <= 0:
                 story.print_death()
                 print('You got DIABETES! you lost!')
-                sys.exit()
+                save_or_no = input('Do you want SWEET revenge?  Y/ N: ').upper()
+                if save_or_no == 'Y':
+                    character.reset_hp()
+                    character.save_character()
+                    sys.exit()
+                else:
+                    pass
+    monster.reset_hp()
     # 16-> lines
 
 
 def main():
+    print(is_max_health())
+    # Story Introduction (ASCII arts)
     story.print_intro()
     story.print_intro_1()
     story.print_happy_kitty()
+
+    # Assign functions to variables.
     user_choice = 0
-    boundary = check_boundary(user_choice)
-    encounter = monster_encounter_chance()
-    character.set_name()
+
+    # Loads JSON file and starts game from last saved position.
+    ask_user = input('1) New Game? / 2) Continue Game?: ')
+    if ask_user == '2':
+        character.load_character()
+        character.greet_user()
+    else:
+        character.set_name()
     create_map()
+
+    # Run game until user quits.
     while user_choice != 5:
         user_choice = user_command()
-        move_character(user_choice, boundary, encounter)
+        move_character(user_choice, is_max_health(), is_valid_move(user_choice))
+        monster_encounter()
+        print('Your  current HP is: ', character.get_hp())
         create_map()
 
 

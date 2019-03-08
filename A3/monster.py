@@ -7,7 +7,7 @@
 
 from random import randint
 
-monster = {'Name': 'Chocolatator', 'HP': 5, 'Damage:': 0}
+monster = {'Name': 'Chocolator', 'HP': 5, 'Damage:': 0}
 
 
 def get_name():
@@ -37,6 +37,12 @@ def decrease_hp():
     """Decrease HP by random numbers between 1 - 6."""
     global monster
     monster['HP'] -= randint(1, 6)
+
+
+def reset_hp():
+    """Reset monster HP."""
+    global monster
+    monster['HP'] = 5
 
 
 def main():
