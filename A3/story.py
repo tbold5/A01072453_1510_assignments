@@ -4,6 +4,8 @@
 # A01072453
 # JAN 11, 2019
 
+"""Set of functions that uses ASCII characters to display whimsical visual objects to users."""
+
 
 def print_candy_reward():
     print("""         o   oo                     
