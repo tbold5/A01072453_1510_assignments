@@ -1,27 +1,46 @@
 class Student:
-    def __init__(self, first_name: str, last_name: str, student_number: str, status: bool):
+    def __init__(self, first_name: str, last_name: str, student_number: str,
+                 student_status: bool, student_grades: list):
+
+        # Checks conditions for first_name and last_name.
         if len(first_name) == 0 or len(last_name) == 0:
-            raise ValueError('Name must contain letters!')
+            raise ValueError('\nName must contain letters!\n')
         else:
             self.__first_name = first_name
             self.__last_name = last_name
 
+        # Checks conditions for student_number.
         if student_number[0] != "A" or not student_number[1:9].isdigit() or len(student_number) != 9:
-            raise ValueError('Student number should start with A followed by 8 digits numbers')
+            raise ValueError('\nStudent number should start with "A" followed by 8 digits numbers\n')
         else:
             self.__student_number = student_number
 
-        self.__status = status
-        self.__final_grades = []
+        # Checks conditions for student status.
+        if type(student_status) != bool:
+            raise ValueError('\nPlease choose valid input!\n')
+        else:
+            self.__status = student_status
+
+        # Check conditions for student grades.
+        if student_grades == list():
+            self.__student_grades = student_grades
+
+        for grade in student_grades:
+            if int(grade) < 0 or int(grade) > 100:
+                raise ValueError('\nGrades must be numbers between 0 - 100\n')
+            else:
+                self.__student_grades = student_grades
 
     def __str__(self):
-        return self.__first_name + ' ' + self.__last_name + ' ' + self.__student_number + ' ' + str(self.__status)
+        return self.__first_name + ' ' + self.__last_name + ' ' + self.__student_number + \
+               ' ' + str(self.__status) + ' ' + str(self.__student_grades)
 
-    # def set_grade(self):
+    def set_grade(self, new_grade):
+        self.__student_grades.append(new_grade)
 
 
 def main():
-    test = Student('Trae', 'Bold', 'A01072453', True)
+    test = Student('Trae', 'Bold', 'A01072453', True, ['100'])
     print(test)
 
 
