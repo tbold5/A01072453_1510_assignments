@@ -39,18 +39,19 @@ def add_grades():
 def file_delete_student():
     student_number = input('To delete student provide Student Number: ').upper()
     with open('students.txt', 'r+') as file_object:
-        if student_number in file_object.read():
-            file_object.seek(0)
-            lines = file_object.readlines()
-            file_object.seek(0)
-            for line in lines:
-                if student_number not in line:
-                    file_object.write(line)
-            file_object.truncate()
-            return True
-        else:
-            print('\nStudent number does not exist!\n')
-            return False
+        for student in file_read():
+            if student_number == student.get_student_number():
+                file_object.seek(0)
+                lines = file_object.readlines()
+                file_object.seek(0)
+                for line in lines:
+                    if student_number not in line:
+                        file_object.write(line)
+                file_object.truncate()
+                return True
+            else:
+                print('\nStudent number does not exist!\n')
+                return False
 
 
 def file_read():
@@ -113,17 +114,17 @@ def main():
 
         # Delete student method.
         elif user_choice == '2':
-            try:
-                if file_delete_student():
-                    print('\nStudent deleted successfully\n')
-                else:
-                    print('Delete student unsuccessful\n')
-            except FileNotFoundError:
-                print('File does not exist!')
+            if file_delete_student():
+                print('\nStudent deleted successfully\n')
+            else:
+                print('Delete student unsuccessful\n')
 
         # Calculate class average method.
         elif user_choice == '3':
-            print('Class average: ', round(calculate_class_gpa(), 2))
+            try:
+                print('Class average: ', round(calculate_class_gpa(), 2))
+            except ZeroDivisionError:
+                print('\nClass list is empty, can not divide by 0.')
 
         # Print class info.
         elif user_choice == '4':
