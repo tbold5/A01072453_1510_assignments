@@ -89,7 +89,6 @@ def print_class_list():
     class_list = []
     for element in file_read():
         class_list.append([element.get_student_last_name(), element])
-    print(class_list)
     sorted_last_name = sorted(class_list)
     for student in sorted_last_name:
         print(student[1])
