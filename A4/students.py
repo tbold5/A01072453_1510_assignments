@@ -44,6 +44,9 @@ class Student:
     def get_student_last_name(self):
         return self.__last_name
 
+    def get_student_number(self):
+        return self.__student_number
+
 
 def main():
     test = Student('Trae', 'Bold', 'A01072453', True, ['100'])
