@@ -15,11 +15,7 @@ class Student:
         else:
             self.__student_number = student_number
 
-        # Checks conditions for student status.
-        if type(student_status) != bool:
-            raise ValueError('\nPlease choose valid input!\n')
-        else:
-            self.__status = student_status
+        self.__status = student_status
 
         # Check conditions for student grades.
         if student_grades == list():
@@ -32,11 +28,21 @@ class Student:
                 self.__student_grades = student_grades
 
     def __str__(self):
+        grades = ''
+        for grade in self.__student_grades:
+            grades += str(grade) + ' '
+
         return self.__first_name + ' ' + self.__last_name + ' ' + self.__student_number + \
-               ' ' + str(self.__status) + ' ' + str(self.__student_grades)
+               ' ' + str(self.__status) + ' ' + grades
 
     def set_grade(self, new_grade):
         self.__student_grades.append(new_grade)
+
+    def get_grade(self):
+        return self.__student_grades
+
+    def get_student_last_name(self):
+        return self.__last_name
 
 
 def main():
