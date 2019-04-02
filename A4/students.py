@@ -47,6 +47,9 @@ class Student:
     def get_student_number(self):
         return self.__student_number
 
+    def update_grade(self, grades: list):
+        self.__student_grades.extend(grades)
+
 
 def main():
     test = Student('Trae', 'Bold', 'A01072453', True, ['100'])
