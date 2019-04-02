@@ -2,6 +2,9 @@ from students import Student
 
 
 def add_student():
+    """Add student.
+
+    A functions that prompts user to add student information and appends it to students.txt file."""
     first_name = input('Student First Name?: ').strip().title()
     last_name = input('Student Last Name?: ').strip().title()
     student_number = input('Student Number?: ').strip().upper()
@@ -10,11 +13,46 @@ def add_student():
     mock_student = Student(first_name, last_name, student_number, student_status, student_grades)
     student_info = str(mock_student)
     file_name = 'students.txt'
-    with open(file_name, 'a') as file_object:
-        file_object.write(student_info + '\n')
+    if is_valid_student_number(student_number):
+        with open(file_name, 'a') as file_object:
+            file_object.write(student_info + '\n')
+    else:
+        print('\nStudent number already exist!\n')
 
 
-def is_in_good_standing(user_choice):
+def get_student_number_list() -> list:
+    """Get list of Student Number.
+
+    A function that reads file from students.txt and returns list of student numbers in a list."""
+    student_number_list = []
+    with open('students.txt', 'r') as file_object:
+        for lines in file_object.readlines():
+            line = lines.split()
+            student_number_list.append(line[2])
+        return student_number_list
+
+
+def is_valid_student_number(student_number: str) -> bool:
+    """Check valid student number.
+
+    A function that takes student number and checks if it exists in the data and returns boolean value.
+    PARAM: student_number, str.
+    PRECONDITION: student_number must be string type with the correct student number format.
+    RETURN: boolean value, depending on if the students exists in the system."""
+    if student_number in get_student_number_list():
+        return False
+    else:
+        return True
+
+
+def is_in_good_standing(user_choice: str) -> bool:
+    """Return value of student standing.
+
+    A function that prompts user if the student is in good or bad standing
+    and returns boolean value depending on user input.
+    PARAM: user_choice, str
+    PRECONDITION: user_choice must be string type and must be valid input.
+    RETURN: boolean value, depending on student standing."""
     if user_choice == '1':
         return True
     elif user_choice == '2':
@@ -23,7 +61,10 @@ def is_in_good_standing(user_choice):
         pass
 
 
-def add_grade():
+def add_grade() -> list:
+    """Add grade.
+
+    A function that prompts user to input student grade, appends and returns it in a list."""
     student_grades = []
     while True:
         user_choice = input('Please provide Student Grade(s) (0 - 100) / press "q" when finished: ').lower()
@@ -37,6 +78,9 @@ def add_grade():
 
 
 def delete_student():
+    """Delete student.
+
+    A function that prompts """
     student_number = input('To delete student provide Student Number: ').upper()
     with open('students.txt', 'r+') as file_object:
         for student in file_read():
@@ -54,7 +98,10 @@ def delete_student():
                 return False
 
 
-def file_read():
+def file_read() -> list:
+    """Read file.
+
+    A function that reads students.txt and instantiates the Student object and returns list of student objects."""
     student_list = []
     with open('students.txt', 'r') as file_object:
         for line in file_object.readlines():
@@ -75,18 +122,27 @@ def file_read():
         return student_list
 
 
-def calculate_student_gpa(student_grade: list):
-    average_gpa = sum(student_grade) / len(student_grade)
-    return average_gpa
+def calculate_student_gpa(student_grade: list) -> float:
+    """Calculate and return the student's gpa as a float."""
+    if len(student_grade) == 0:
+        return None
+    else:
+        average_gpa = sum(student_grade) / len(student_grade)
+        return average_gpa
 
 
-def calculate_class_gpa():
-    student_gpa = [calculate_student_gpa(element.get_grade()) for element in file_read()]
+def calculate_class_gpa() -> float:
+    """Calculate and return the class gpa as a float."""
+    student_gpa = []
+    for student in file_read():
+        if calculate_student_gpa(student.get_grade()) is not None:
+            student_gpa.append(calculate_student_gpa(student.get_grade()))
     class_avg = sum(student_gpa) / len(student_gpa)
     return class_avg
 
 
 def print_class_list():
+    """Print sorted class list by Last Name."""
     class_list = []
     for student in file_read():
         class_list.append([student.get_student_last_name(), student])
@@ -96,6 +152,7 @@ def print_class_list():
 
 
 def add_new_grade():
+    """Add the specified grade to this student's list of grades."""
     student_number = input('Please provide Student Number: ').upper()
     class_list = file_read()
     updated_grade = False
@@ -113,6 +170,7 @@ def add_new_grade():
 
 
 def main():
+    valid_choices = ['1', '2', '3', '4', '5', '6']
     user_choice = ''
     while user_choice != '5':
         user_choice = input("""
@@ -152,8 +210,9 @@ def main():
         elif user_choice == '6':
             add_new_grade()
 
-        else:
+        elif user_choice not in valid_choices:
             print('\n***Please choose a valid option***\n')
+    print('\n***Goodbye!***\n')
 
 
 if __name__ == '__main__':
