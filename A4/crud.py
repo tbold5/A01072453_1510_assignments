@@ -6,7 +6,7 @@ def add_student():
     last_name = input('Student Last Name?: ').strip().title()
     student_number = input('Student Number?: ').strip().upper()
     student_status = is_in_good_standing(input('Student Status? 1) Good standing / 2) Bad standing'))
-    student_grades = add_grades()
+    student_grades = add_grade()
     mock_student = Student(first_name, last_name, student_number, student_status, student_grades)
     student_info = str(mock_student)
     file_name = 'students.txt'
@@ -23,7 +23,7 @@ def is_in_good_standing(user_choice):
         pass
 
 
-def add_grades():
+def add_grade():
     student_grades = []
     while True:
         user_choice = input('Please provide Student Grade(s) (0 - 100) / press "q" when finished: ').lower()
@@ -36,7 +36,7 @@ def add_grades():
     return student_grades
 
 
-def file_delete_student():
+def delete_student():
     student_number = input('To delete student provide Student Number: ').upper()
     with open('students.txt', 'r+') as file_object:
         for student in file_read():
@@ -88,11 +88,28 @@ def calculate_class_gpa():
 
 def print_class_list():
     class_list = []
-    for element in file_read():
-        class_list.append([element.get_student_last_name(), element])
+    for student in file_read():
+        class_list.append([student.get_student_last_name(), student])
     sorted_last_name = sorted(class_list)
     for student in sorted_last_name:
         print(student[1])
+
+
+def add_new_grade():
+    student_number = input('Please provide Student Number: ').upper()
+    class_list = file_read()
+    updated_grade = False
+    for student in class_list:
+        if student_number == student.get_student_number():
+            student.update_grade(add_grade())
+            updated_grade = True
+    if updated_grade:
+        print('\nStudent graded added successfully!')
+        with open('students.txt', 'w') as file_object:
+            for student_obj in class_list:
+                file_object.write(str(student_obj) + '\n')
+    else:
+        print('\nStudent number not found!')
 
 
 def main():
@@ -104,6 +121,7 @@ def main():
         3. Calculate class average
         4. Print class list by last name
         5. Quit
+        6. Add grade
         """)
         # Add student method.
         if user_choice == '1':
@@ -114,7 +132,7 @@ def main():
 
         # Delete student method.
         elif user_choice == '2':
-            if file_delete_student():
+            if delete_student():
                 print('\nStudent deleted successfully\n')
             else:
                 print('Delete student unsuccessful\n')
@@ -126,9 +144,13 @@ def main():
             except ZeroDivisionError:
                 print('\nClass list is empty, can not divide by 0.')
 
-        # Print class info.
+        # Print class info method.
         elif user_choice == '4':
             print_class_list()
+
+        # Add grade method
+        elif user_choice == '6':
+            add_new_grade()
 
         else:
             print('\n***Please choose a valid option***\n')
