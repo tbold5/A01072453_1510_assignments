@@ -73,6 +73,14 @@ class Student:
         """Add the specified grades in the list to this student's list of grades."""
         self.__student_grades.extend(grades)
 
+    def calculate_student_gpa(self, student_grade: list) -> float or None:
+        """Calculate and return the student's gpa as a float."""
+        if len(student_grade) == 0:
+            return None
+        else:
+            average_gpa = sum(student_grade) / len(student_grade)
+            return average_gpa
+
 
 def main():
     test = Student('Trae', 'Bold', 'A01072453', True, ['100'])
