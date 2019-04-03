@@ -81,21 +81,20 @@ def delete_student():
     """Delete student.
 
     A function that prompts """
-    student_number = input('To delete student provide Student Number: ').upper()
-    with open('students.txt', 'r+') as file_object:
-        for student in file_read():
-            if student_number == student.get_student_number():
-                file_object.seek(0)
-                lines = file_object.readlines()
-                file_object.seek(0)
-                for line in lines:
-                    if student_number not in line:
-                        file_object.write(line)
-                file_object.truncate()
-                return True
-            else:
-                print('\nStudent number does not exist!\n')
-                return False
+    student_number = input('To delete student provide Student Number, Example(A12345678): ').upper()
+    list_student_number = [student.get_student_number() for student in file_read()]
+    if student_number in list_student_number:
+        with open('students.txt', 'r+') as file_object:
+            lines = file_object.readlines()
+            file_object.seek(0)
+            for line in lines:
+                if student_number not in line:
+                    file_object.write(line)
+            file_object.truncate()
+        return True
+    else:
+        print('\nStudent number does not exist!\n')
+        return False
 
 
 def file_read() -> list:
@@ -122,21 +121,12 @@ def file_read() -> list:
         return student_list
 
 
-def calculate_student_gpa(student_grade: list) -> float:
-    """Calculate and return the student's gpa as a float."""
-    if len(student_grade) == 0:
-        return None
-    else:
-        average_gpa = sum(student_grade) / len(student_grade)
-        return average_gpa
-
-
 def calculate_class_gpa() -> float:
     """Calculate and return the class gpa as a float."""
     student_gpa = []
     for student in file_read():
-        if calculate_student_gpa(student.get_grade()) is not None:
-            student_gpa.append(calculate_student_gpa(student.get_grade()))
+        if student.calculate_student_gpa(student.get_grade()) is not None:
+            student_gpa.append(student.calculate_student_gpa(student.get_grade()))
     class_avg = sum(student_gpa) / len(student_gpa)
     return class_avg
 
