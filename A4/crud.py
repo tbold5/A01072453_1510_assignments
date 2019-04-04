@@ -18,6 +18,7 @@ def add_student():
             file_object.write(student_info + '\n')
     else:
         print('\nStudent number already exist!\n')
+    # 13 lines
 
 
 def get_student_number_list() -> list:
@@ -80,7 +81,7 @@ def add_grade() -> list:
 def delete_student():
     """Delete student.
 
-    A function that prompts """
+    A function that prompts user to input student number and deletes student from the file if it is in there."""
     student_number = input('To delete student provide Student Number, Example(A12345678): ').upper()
     list_student_number = [student.get_student_number() for student in file_read()]
     if student_number in list_student_number:
@@ -95,6 +96,7 @@ def delete_student():
     else:
         print('\nStudent number does not exist!\n')
         return False
+    # 14 lines
 
 
 def file_read() -> list:
@@ -119,6 +121,7 @@ def file_read() -> list:
             student_object = Student(info[0], info[1], info[2], bool(info[3]), student_grades)
             student_list.append(student_object)
         return student_list
+    # 14 lines
 
 
 def calculate_class_gpa() -> float:
@@ -157,6 +160,7 @@ def add_new_grade():
                 file_object.write(str(student_obj) + '\n')
     else:
         print('\nStudent number not found!')
+    # 14 lines
 
 
 def main():
@@ -198,7 +202,10 @@ def main():
 
         # Add grade method
         elif user_choice == '6':
-            add_new_grade()
+            try:
+                add_new_grade()
+            except ValueError as e:
+                print(e)
 
         elif user_choice not in valid_choices:
             print('\n***Please choose a valid option***\n')
