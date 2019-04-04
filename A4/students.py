@@ -30,9 +30,6 @@ class Student:
         self.__status = student_status
 
         # Check conditions for student grades.
-        if student_grades == list():
-            self.__student_grades = student_grades
-
         for grade in student_grades:
             if int(grade) < 0 or int(grade) > 100:
                 raise ValueError('\nGrades must be numbers between 0 - 100\n')
@@ -50,8 +47,9 @@ class Student:
         return self.__first_name + ' ' + self.__last_name + ' ' + self.__student_number + \
             ' ' + str(self.__status) + ' ' + grades
 
-    def set_grade(self, new_grade):
-        self.__student_grades.append(new_grade)
+    def set_grade(self, new_grade: int):
+        if new_grade in range(0, 101):
+            self.__student_grades.append(new_grade)
 
     def get_student_first_name(self):
         """Return the first name."""
@@ -69,9 +67,17 @@ class Student:
         """Return the student grade."""
         return self.__student_grades
 
+    def get_student_status(self):
+        """Return the student status."""
+        return self.__status
+
     def update_grade(self, grades: list):
         """Add the specified grades in the list to this student's list of grades."""
-        self.__student_grades.extend(grades)
+        for grade in grades:
+            if int(grade) < 0 or int(grade) > 100:
+                raise ValueError('\nGrades must be numbers between 0 - 100\n')
+            else:
+                self.__student_grades.extend(grades)
 
     def calculate_student_gpa(self, student_grade: list) -> float or None:
         """Calculate and return the student's gpa as a float."""
@@ -83,8 +89,7 @@ class Student:
 
 
 def main():
-    test = Student('Trae', 'Bold', 'A01072453', True, ['100'])
-    print(test)
+    pass
 
 
 if __name__ == '__main__':
