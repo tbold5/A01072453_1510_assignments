@@ -1,3 +1,10 @@
+"""COMP1510 Assignment # 4:"""
+
+# Trae Bold
+# A01072453
+# JAN 11, 2019
+
+
 from students import Student
 
 

@@ -6,10 +6,12 @@
 
 
 def base_conversion(original_base: int, original_number: int, destination_base: int) -> int:
-    """Converts base 10 into base b. . Each time a division is performed the remainder and quotient are saved.
+    """Converts any base from 2 - 10 into base b. . Each time a division is performed the remainder and quotient are saved.
     At each step, the dividend (numerator) is the quotient from the preceding step; the divisor (denominator) is always b.
     """
-
+    for num in str(original_number):
+        if int(num) >= original_base:
+            raise ValueError('\nOriginal number can not contain digit greater than or equal to base!\n')
     final = ''
     decimal = 0
     number_list = []
@@ -33,7 +35,10 @@ def base_conversion(original_base: int, original_number: int, destination_base: 
 
 
 def main():
-    print(base_conversion(10, 16, 2))
+    try:
+        print(base_conversion(2, 100, 10))
+    except ValueError as e:
+        print(e)
 
 
 if __name__ == '__main__':
