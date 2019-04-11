@@ -11,17 +11,13 @@ def password_validator() -> bool:
     while True:
         user_input = input('Provide password: ')
 
-        length_regex = re.compile(r'.{8,}')
-        length_match = length_regex.search(user_input)
+        length_match = re.compile(r'.{8,}').search(user_input)
 
-        upper_case_regex = re.compile(r'[A-Z]')
-        upper_case_match = upper_case_regex.search(user_input)
+        upper_case_match = re.compile(r'[A-Z]').search(user_input)
 
-        lower_case_regex = re.compile(r'[a-z]')
-        lower_case_match = lower_case_regex.search(user_input)
+        lower_case_match = re.compile(r'[a-z]').search(user_input)
 
-        digit_regex = re.compile(r'\d')
-        digit_match = digit_regex.search(user_input)
+        digit_match = re.compile(r'\d').search(user_input)
 
         if length_match and upper_case_match and lower_case_match and digit_match:
             print('Password updated successfully!')
