@@ -22,7 +22,7 @@ def website():
                     "<meta name='description' content=" + user_name + "'s Webpage>\n"
                     "<meta name='author' content=" + user_name + ">\n"
                     "<link rel='stylesheet' href='css/styles.css?v=1.0'></head>\n<body>\n<center>\n<h1>" + user_name + "</h1>\n"
-                    "</center>\n" + user_description + "\n<img src = " + website_url + "></img>\n</body>\n</html>\n")
+                    "</center>\n" + user_description + "\n<a href = \"" + website_url + "\">Link</a>\n</body>\n</html>\n")
         f_obj.write(template)
 
 
