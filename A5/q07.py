@@ -8,27 +8,27 @@ import re
 
 
 def password_validator() -> bool:
-    while True:
-        user_input = input('Provide password: ')
+    user_input = input('Provide password: ')
 
-        length_match = re.compile(r'.{8,}').search(user_input)
+    length_match = re.compile(r'.{8,}').search(user_input)
 
-        upper_case_match = re.compile(r'[A-Z]').search(user_input)
+    upper_case_match = re.compile(r'[A-Z]').search(user_input)
 
-        lower_case_match = re.compile(r'[a-z]').search(user_input)
+    lower_case_match = re.compile(r'[a-z]').search(user_input)
 
-        digit_match = re.compile(r'\d').search(user_input)
+    digit_match = re.compile(r'\d').search(user_input)
 
-        if length_match and upper_case_match and lower_case_match and digit_match:
-            print('Password updated successfully!')
-            return True
-        else:
-            print('Password too weak!')
-            return False
+    if length_match and upper_case_match and lower_case_match and digit_match:
+        print('Password updated successfully!')
+        return True
+    else:
+        print('Password too weak!')
+        return False
 
 
 def main():
-    password_validator()
+    while True:
+        password_validator()
 
 
 if __name__ == '__main__':
