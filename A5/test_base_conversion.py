@@ -16,4 +16,3 @@ class TestBase_conversion_type(TestCase):
     def test_base_conversion_digit_to_binary(self):
         self.assertEqual(100100, base_conversion(10, 36, 2))
 
-    
