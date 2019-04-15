@@ -4,8 +4,19 @@
 # A01072453
 # JAN 11, 2019
 
+import doctest
+
 
 def backup(file_name: str):
+    """Backup a file.
+
+    A function that accepts file_name as string
+    and creates new file in the same directory with some content but with .bak extension.
+    PARAM: file_name, a string.
+    POSTCONDTION: prints helpful message if the file backed up successfully or not.
+    >>> backup('students.txt')
+    Generated students.bak file successfully!
+    """
     formatted_name = file_name.replace('.txt', '.bak')
     try:
         with open(file_name, 'r') as file_object:

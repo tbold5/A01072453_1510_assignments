@@ -4,10 +4,20 @@
 # A01072453
 # JAN 11, 2019
 
+import doctest
+
 
 def base_conversion(original_base: int, original_number: int, destination_base: int) -> int:
-    """Converts any base from 2 - 10 into base b. . Each time a division is performed the remainder and quotient are saved.
-    At each step, the dividend (numerator) is the quotient from the preceding step; the divisor (denominator) is always b.
+    """Do base conversion.
+
+    A function that converts any number with base between 2 - 10 to destination base of choice between 2 - 10.
+    PRECONDITION: original_base must be an integer between 2- 10.
+    PRECONDITION: destination_base must be an integer between 2 - 10.
+    RETURN: new value as an integer.
+    >>> base_conversion(2, 110001110, 10)
+    398
+    >>> base_conversion(10, 36, 2)
+    100100
     """
     for num in str(original_number):
         if int(num) >= original_base:
@@ -36,7 +46,7 @@ def base_conversion(original_base: int, original_number: int, destination_base: 
 
 def main():
     try:
-        print(base_conversion(2, 100, 10))
+        print(base_conversion(2, 110001110, 10))
     except ValueError as e:
         print(e)
 

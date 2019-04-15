@@ -4,8 +4,22 @@
 # A01072453
 # JAN 11, 2019
 
+import doctest
+
 
 def sum_of_primes(upper_bound: int) -> int:
+    """Calculate sum_of_primes.
+
+    A function that accepts a single positive integer and
+    returns the sum of primes between 0 - upper_bound as an integer.
+    PRECONDITION: upper_bound must be a positive integer.
+    PARAM: upper_bound, a positive int
+    RETURN: integer, sum of primes between 0 - upper_bound as an integer.
+    >>> sum_of_primes(12)
+    28
+    >>> sum_of_primes(0)
+    0
+    """
     if upper_bound < 0:
         raise ValueError("Only positive integers accepted as upper bounds!")
     else:
@@ -23,10 +37,10 @@ def sum_of_primes(upper_bound: int) -> int:
 
 def main():
     try:
-        print(sum_of_primes(-1))
+        print(sum_of_primes(12))
     except ValueError as e:
         print(e)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

@@ -4,8 +4,23 @@
 # A01072453
 # JAN 11, 2019
 
+import doctest
+
 
 def the_gcd(a, b: int) -> int:
+    """Find greatest common divisor.
+
+    A function that finds greatest common divisor between two integers.
+    PRECONDITION: a, has to be non-zero integer.
+    PRECONDITION: b, has to be non-zero integer.
+    PARAM: a, an int.
+    PARAM: b, an int.
+    RETURN: int, greatest common divisor between a and b.
+    >>> the_gcd(10, -25)
+    5
+    >>> the_gcd(11, -3)
+    1
+    """
     while b != 0:
         (a, b) = (b, a % b)
     # Return absolute value.
@@ -13,8 +28,8 @@ def the_gcd(a, b: int) -> int:
 
 
 def main():
-    print(the_gcd(10, -25))
+    print(the_gcd(3, 11))
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

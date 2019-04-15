@@ -5,9 +5,19 @@
 # JAN 11, 2019
 
 from copy import copy
+import doctest
 
 
 def selection_sort(unsorted_list: list) -> list:
+    """Sort a list.
+
+    A function that takes non-empty list and returns a sorted copy.
+    PRECONDITION: unsorted_list has to be non-empty list.
+    PARAM: unsorted_list, a list.
+    RETURN: sorted copy list.
+    >>> selection_sort([12, 5, 2, 6])
+    [2, 5, 6, 12]
+    """
     if len(unsorted_list) == 0:
         raise ValueError('List must contain sortable items!')
     else:
