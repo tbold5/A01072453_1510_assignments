@@ -21,6 +21,8 @@ def the_gcd(a, b: int) -> int:
     >>> the_gcd(11, -3)
     1
     """
+    if a == 0 and b == 0:
+        raise ValueError('Values has to be non-zero integers!')
     while b != 0:
         (a, b) = (b, a % b)
     # Return absolute value.
@@ -28,7 +30,10 @@ def the_gcd(a, b: int) -> int:
 
 
 def main():
-    print(the_gcd(3, 11))
+    try:
+        print(the_gcd(0, 0))
+    except ValueError as e:
+        print(e)
 
 
 if __name__ == '__main__':
